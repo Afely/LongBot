@@ -165,7 +165,7 @@ bot.on("messageReactionAdd", () =>{
     let x
     for(x = 0; zeez.length > x; x += 1){
         if(!games[zeez[x].id]) return;
-            games[zeez[x].id].next()
+        games[zeez[x].id].next()
         
     }
 })
