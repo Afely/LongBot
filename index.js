@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client()
-const token = "NzM3NDAxMzE5NDA4Nzk1NzEw.Xx80fg.BHJkhYQOFC1zF7G8fsJqtjkrFJ8";
 const prefix = "c!";
 
 const player = "<:head:739022533918982174>"
@@ -259,4 +258,4 @@ read = (code, mesg, lvl) =>{
     mesg.channel.send(lvlembed)
 }
 
-bot.login(token)
+bot.login(process.env.token)
