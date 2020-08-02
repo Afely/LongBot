@@ -250,7 +250,7 @@ read = (code, mesg, lvl) =>{
     const lvlembed = new Discord.MessageEmbed()
     .setColor(0xF5BA00)
     .setTitle(plr + " • LEVEL " + lvl)
-    .setDescription(level)
+    .setDescription(level + "\n\nWASD to move.")
     .setFooter("Created by Afely\nThanks to Martin Magni & Fancade")
     // win detection
     if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**")
