@@ -91,20 +91,20 @@ bot.on("message", msg =>{
 
         // movement
 
-    switch(msg.content){
-        case /w/i || /up/i:
+    switch(msg.content.toLowerCase()){
+        case "w" || "up":
             if(!games[msg.author.id]) return;
             games[msg.author.id].w()
             break;
-        case /a/i:
+        case "a":
             if(!games[msg.author.id]) return;
             games[msg.author.id].a()
             break;
-        case /s/i:
+        case "s":
             if(!games[msg.author.id]) return;
             games[msg.author.id].s()
             break;
-        case /d/i:
+        case "d":
             if(!games[msg.author.id]) return;
             games[msg.author.id].d()
             break;
