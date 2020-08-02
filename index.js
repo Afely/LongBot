@@ -11,7 +11,6 @@ const bodyH = "<:bodyH:739022604462981150>"
 const bodyV = "<:bodyV:739022629415026810>"
 const wall = "<:wall:739023283353288716>"
 
-const reactions = new Discord.ReactionCollector(msg)
 var mbsg
 
 var games = {}
@@ -156,17 +155,6 @@ bot.on("message", msg =>{
         case "next":
             if(!games[msg.author.id]) return;
             games[msg.author.id].next()
-    }
-})
-
-bot.on("messageReactionAdd", () =>{
-    if(!reactions) return;
-    let zeez = reactions.users.array()
-    let x
-    for(x = 0; zeez.length > x; x += 1){
-        if(!games[zeez[x].id]) return;
-        games[zeez[x].id].next()
-        
     }
 })
 
