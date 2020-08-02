@@ -11,7 +11,6 @@ const bodyH = "<:bodyH:739022604462981150>"
 const bodyV = "<:bodyV:739022629415026810>"
 const wall = "<:wall:739023283353288716>"
 
-var lvlembed
 var mbsg
 
 var games = {}
@@ -86,7 +85,7 @@ var levels = {
 bot.on("ready", () =>{console.log("LongBot is online."); bot.user.setActivity("c!help", {type: "WATCHING"})});
 
 bot.on("message", msg =>{
-    if(msg.author.id == bot.user.id && msg.embeds.includes(lvlembed)){
+    if(msg.author.id == bot.user.id && msg.embeds[0].description.includes("•")){
         msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
     }
     if(msg.author.bot) return;
@@ -276,7 +275,7 @@ read = (code, mesg, lvl) =>{
     }
     level = level.toString().replace(/,/g, "")
     // embed compiling
-    lvlembed = new Discord.MessageEmbed()
+    const lvlembed = new Discord.MessageEmbed()
     .setColor(0xF5BA00)
     .setTitle(plr + " • LEVEL " + lvl)
     .setDescription(level + "\n\nWASD/up down left right to move")
