@@ -11,7 +11,7 @@ const bodyH = "<:bodyH:739022604462981150>"
 const bodyV = "<:bodyV:739022629415026810>"
 const wall = "<:wall:739023283353288716>"
 
-const lvlembed
+var lvlembed
 var mbsg
 
 var games = {}
