@@ -92,19 +92,19 @@ bot.on("message", msg =>{
         // movement
 
     switch(msg.content){
-        case "w":
+        case /w/i || /up/i:
             if(!games[msg.author.id]) return;
             games[msg.author.id].w()
             break;
-        case "a":
+        case /a/i:
             if(!games[msg.author.id]) return;
             games[msg.author.id].a()
             break;
-        case "s":
+        case /s/i:
             if(!games[msg.author.id]) return;
             games[msg.author.id].s()
             break;
-        case "d":
+        case /d/i:
             if(!games[msg.author.id]) return;
             games[msg.author.id].d()
             break;
