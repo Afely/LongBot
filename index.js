@@ -11,6 +11,7 @@ const bodyH = "<:bodyH:739022604462981150>"
 const bodyV = "<:bodyV:739022629415026810>"
 const wall = "<:wall:739023283353288716>"
 
+const reactions = new Discord.ReactionCollector(msg)
 var mbsg
 
 var games = {}
@@ -87,12 +88,19 @@ bot.on("ready", () =>{console.log("LongBot is online."); bot.user.setActivity("c
 bot.on("message", msg =>{
     if(msg.author.bot) return;
     mbsg = msg
+    if(msg.author.id = bot.user.id){
+        msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
+    }
     let args = msg.content.substring(2).split(" ");
 
         // movement
 
     switch(msg.content.toLowerCase()){
-        case "w" || "up":
+        case "w":
+            if(!games[msg.author.id]) return;
+            games[msg.author.id].w()
+            break;
+        case "up":
             if(!games[msg.author.id]) return;
             games[msg.author.id].w()
             break;
@@ -100,11 +108,23 @@ bot.on("message", msg =>{
             if(!games[msg.author.id]) return;
             games[msg.author.id].a()
             break;
+        case "left":
+            if(!games[msg.author.id]) return;
+            games[msg.author.id].a()
+            break;
         case "s":
             if(!games[msg.author.id]) return;
             games[msg.author.id].s()
             break;
+        case "down":
+            if(!games[msg.author.id]) return;
+            games[msg.author.id].s()
+            break;
         case "d":
+            if(!games[msg.author.id]) return;
+            games[msg.author.id].d()
+            break;
+        case "right":
             if(!games[msg.author.id]) return;
             games[msg.author.id].d()
             break;
@@ -120,7 +140,7 @@ bot.on("message", msg =>{
             .setTitle("LongBot - Longcat for Discord")
             .setColor(0xF5BA00)
             .addField("Commands", "-c!help - Gee, I dunno\n-c!play (level) - Start a game at level 1 or specified level.\n-c!reset - Resets current level.\n-c!next - Continue to next level.")
-            .addField("Notes", "Version 1.0\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please tell me.")
+            .addField("Notes", "Version 1.1\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please tell me.")
             msg.channel.send(helpembed)
             break;
         case "play":
@@ -136,6 +156,17 @@ bot.on("message", msg =>{
         case "next":
             if(!games[msg.author.id]) return;
             games[msg.author.id].next()
+    }
+})
+
+bot.on("messageReactionAdd", () =>{
+    if(!reactions) return;
+    let zeez = reactions.users.array()
+    let x
+    for(x = 0; zeez.length > x; x += 1){
+        if(!games[zeez[x].id]) return;
+            games[zeez[x].id].next()
+        
     }
 })
 
@@ -250,10 +281,10 @@ read = (code, mesg, lvl) =>{
     const lvlembed = new Discord.MessageEmbed()
     .setColor(0xF5BA00)
     .setTitle(plr + " • LEVEL " + lvl)
-    .setDescription(level + "\n\nWASD to move.")
+    .setDescription(level + "\n\nWASD/up down left right to move")
     .setFooter("Created by Afely\nThanks to Martin Magni & Fancade")
     // win detection
-    if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**")
+    if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**\nc!next to continue")
     if(code.length = 0){mesg.channel.send("This level does not exist."); return;}
     mesg.channel.send(lvlembed)
 }
