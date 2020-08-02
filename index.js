@@ -250,6 +250,26 @@ bot.on("messageReactionAdd", (react, user) =>{
             if(!games[user.id]) return;
             games[user.id].w()
             break;
+        case "🔽":
+            if(!games[user.id]) return;
+            games[user.id].s()
+            break;
+        case "◀️":
+            if(!games[user.id]) return;
+            games[user.id].a()
+            break;
+        case "▶️":
+            if(!games[user.id]) return;
+            games[user.id].d()
+            break;
+        case "🔄":
+            if(!games[user.id]) return;
+            games[user.id].reset()
+            break;
+        case "⏭️":
+            if(!games[user.id]) return;
+            games[user.id].next()
+            break;
     }
 })
 
