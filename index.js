@@ -85,11 +85,11 @@ var levels = {
 bot.on("ready", () =>{console.log("LongBot is online."); bot.user.setActivity("c!help", {type: "WATCHING"})});
 
 bot.on("message", msg =>{
-    if(msg.author.bot) return;
-    mbsg = msg
-    if(msg.author.id == bot.user.id){
+    if(games[msg.channel.lastMessage.author.id] && msg.author.id == bot.user.id){
         msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
     }
+    if(msg.author.bot) return;
+    mbsg = msg
     let args = msg.content.substring(2).split(" ");
 
         // movement
@@ -283,6 +283,8 @@ read = (code, mesg, lvl) =>{
     // win detection
     if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**\nc!next to continue")
     if(code.length = 0){mesg.channel.send("This level does not exist."); return;}
+    mesg.channel.lastMessage.delete()
+    mesg.channel.lastMessage.delete()
     mesg.channel.send(lvlembed)
 }
 
