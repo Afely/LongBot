@@ -85,7 +85,7 @@ var levels = {
 bot.on("ready", () =>{console.log("LongBot is online."); bot.user.setActivity("c!help", {type: "WATCHING"})});
 
 bot.on("message", msg =>{
-    if(msg.author.id == bot.user.id && msg.embeds[0].description.includes("•")){
+    if(msg.author.id == bot.user.id && msg.embeds[0].title.includes("•")){
         msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
     }
     if(msg.author.bot) return;
