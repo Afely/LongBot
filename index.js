@@ -87,9 +87,9 @@ bot.on("ready", () =>{console.log("LongBot is online."); bot.user.setActivity("c
 bot.on("message", msg =>{
     if(msg.author.bot) return;
     mbsg = msg
-    if(msg.author.id = bot.user.id){
-        msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
-    }
+    //if(msg.author.id = bot.user.id){
+        //msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
+    //}
     let args = msg.content.substring(2).split(" ");
 
         // movement
