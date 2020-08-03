@@ -180,6 +180,7 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
+                this.msg.channel.bulkDelete(3)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             a(){
@@ -245,7 +246,7 @@ class game{
         }
 
 bot.on("messageReactionAdd", (react, user) =>{
-    if(!games[user.id] || !react.message.embeds[0].title.startsWith(user.username)) return;
+    if(!games[user.id] || !react.message.embeds[0].title.startsWith(user.username) || react.message.author.id != bot.user.id) return;
 
     switch(react.emoji.name){
         case "🔼":
@@ -267,6 +268,7 @@ bot.on("messageReactionAdd", (react, user) =>{
             games[user.id].next()
             break;
     }
+    react.message.delete()
 })
 
 // level generation
