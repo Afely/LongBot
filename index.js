@@ -138,8 +138,8 @@ bot.on("message", msg =>{
             const helpembed = new Discord.MessageEmbed()
             .setTitle("LongBot - Longcat for Discord")
             .setColor(0xF5BA00)
-            .addField("Commands", "-c!help - Gee, I dunno\n-c!play (level) - Start a game at level 1 or specified level.\n-c!reset - Resets current level.\n-c!next - Continue to next level.")
-            .addField("Notes", "Version 1.1\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please tell me.")
+            .addField("Commands", "-c!help - Posts this help board.\n-c!play (level) - Start a game at level 1 or specified level.\n-c!reset - Resets current level.\n-c!next - Continue to next level.")
+            .addField("Notes", "Version 1.1\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please post them in\nthe LongBot Discord server.")
             msg.channel.send(helpembed)
             break;
         case "play":
@@ -245,29 +245,25 @@ class game{
         }
 
 bot.on("messageReactionAdd", (react, user) =>{
+    if(!games[user.id] || !react.message.embeds[0].title.startsWith(user.username)) return;
+
     switch(react.emoji.name){
         case "🔼":
-            if(!games[user.id]) return;
             games[user.id].w()
             break;
         case "🔽":
-            if(!games[user.id]) return;
             games[user.id].s()
             break;
         case "◀️":
-            if(!games[user.id]) return;
             games[user.id].a()
             break;
         case "▶️":
-            if(!games[user.id]) return;
             games[user.id].d()
             break;
         case "🔄":
-            if(!games[user.id]) return;
             games[user.id].reset()
             break;
         case "⏭️":
-            if(!games[user.id]) return;
             games[user.id].next()
             break;
     }
