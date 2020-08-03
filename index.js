@@ -3,13 +3,13 @@ const bot = new Discord.Client()
 const prefix = "c!";
 
 const player = "<:head:739022533918982174>"
-const wallH = "<:wallH:739022697228402699>"
-const wallV = "<:wallV:739022724113891409>"
-const wallC = "<:wallC:739022656837517324>"
-const BG = "<:BG:739022772457570355>"
 const bodyH = "<:bodyH:739022604462981150>"
 const bodyV = "<:bodyV:739022629415026810>"
-const wall = "<:wall:739023283353288716>"
+var wallH = "<:wallH:739022697228402699>"
+var wallV = "<:wallV:739022724113891409>"
+var wallC = "<:wallC:739022656837517324>"
+var BG = "<:BG:739022772457570355>"
+var wall = "<:wall:739023283353288716>"
 
 var mbsg
 
@@ -18,30 +18,30 @@ var games = {}
 //levels
 
 var levels = {
-1:"wc wh wh wh wc w R wv bg bg bg wc wc R wv bg bg bg bg wv R wc wc bg P bg wv R w wv bg bg bg wv R w wc wh wh wh wc", 
-2:"wc wh wh wh wh wc R wv bg bg bg bg wv R wv bg bg P bg wv R wv bg w w bg wv R wv bg bg bg bg wv R wc wh wh wh wh wc", 
-3:"wc wh wh wh wh wc R wv bg bg bg bg wv R wc wc bg P bg wv R w wv bg bg bg wv R w wc wc bg bg wv R w w wc wh wh wc", 
-4:"w w w wc wh wh wc R w wc wh wc bg bg wv R wc wc bg bg bg bg wv R wv P bg w w bg wv R wv bg bg w w bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wh wc", 
-5:"w w w wc wh wh wc R w w w wv bg bg wv R wc wh wh wc bg w wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
+1:"wc wh wh wh wc w R wv bg bg bg wc wc R wv bg bg bg bg wv R wc wc bg P bg wv R w wv bg bg bg wv R w wc wh wh wh wc #0", 
+2:"wc wh wh wh wh wc R wv bg bg bg bg wv R wv bg bg P bg wv R wv bg w w bg wv R wv bg bg bg bg wv R wc wh wh wh wh wc #0", 
+3:"wc wh wh wh wh wc R wv bg bg bg bg wv R wc wc bg P bg wv R w wv bg bg bg wv R w wc wc bg bg wv R w w wc wh wh wc #0", 
+4:"w w w wc wh wh wc R w wc wh wc bg bg wv R wc wc bg bg bg bg wv R wv P bg w w bg wv R wv bg bg w w bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wh wc #0", 
+5:"w w w wc wh wh wc R w w w wv bg bg wv R wc wh wh wc bg w wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #0", 
 
-6:"w w wc wh wh wh wc R wc wh wc bg bg bg wv R wv bg bg bg bg bg wv R wv bg w w bg P wv R wv bg w w bg bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
-7:"wc wh wh wh wc w w R wv bg bg bg wc wc w R wv bg w bg bg wc wc R wv bg P bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
-8:"w wc wh wh wh wc w R wc wc bg bg bg wv w R wv bg bg w bg wc wc R wv bg bg bg bg bg wv R wv bg bg bg P bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
-9:"wc wh wh wh wh wc w R wv bg bg bg P wc wc R wv bg w bg bg bg wv R wv bg bg bg w bg wv R wc wc bg bg bg bg wv R wv bg bg bg wc wh wc R w wc wh wh wc w w", 
-10:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wh wc", 
+6:"w w wc wh wh wh wc R wc wh wc bg bg bg wv R wv bg bg bg bg bg wv R wv bg w w bg P wv R wv bg w w bg bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
+7:"wc wh wh wh wc w w R wv bg bg bg wc wc w R wv bg w bg bg wc wc R wv bg P bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
+8:"w wc wh wh wh wc w R wc wc bg bg bg wv w R wv bg bg w bg wc wc R wv bg bg bg bg bg wv R wv bg bg bg P bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
+9:"wc wh wh wh wh wc w R wv bg bg bg P wc wc R wv bg w bg bg bg wv R wv bg bg bg w bg wv R wc wc bg bg bg bg wv R wv bg bg bg wc wh wc R w wc wh wh wc w w #1", 
+10:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wh wc #1", 
 
 
-11:"w w w wc wh wh wc R w w wc wc bg bg wv R wc wh wc bg bg bg wv R wv bg bg bg P bg wv R wc wc bg bg bg bg wv R w wv bg bg bg bg wv R w wc wh wh wh wh wc", 
-12:"w wc wh wh wh wh wc R wc wc bg bg bg bg wv R wv bg bg bg P bg wv R wv bg w bg bg bg wv R wv bg bg bg bg wc wc R wv bg bg bg bg wv w R wc wh wh wh wh wc w", 
-13:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wv bg bg P w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
-14:"w wc wh wh wh wh wc R wc wc bg bg bg bg wv R wv bg bg bg P bg wv R wv bg w bg bg bg wv R wv bg bg w bg bg wv R wc wc bg bg bg wc wc R w wc wh wh wh wc w", 
-15:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg w w P bg wv R wv bg bg bg bg bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
+11:"w w w wc wh wh wc R w w wc wc bg bg wv R wc wh wc bg bg bg wv R wv bg bg bg P bg wv R wc wc bg bg bg bg wv R w wv bg bg bg bg wv R w wc wh wh wh wh wc #2", 
+12:"w wc wh wh wh wh wc R wc wc bg bg bg bg wv R wv bg bg bg P bg wv R wv bg w bg bg bg wv R wv bg bg bg bg wc wc R wv bg bg bg bg wv w R wc wh wh wh wh wc w #2", 
+13:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wv bg bg P w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #2", 
+14:"w wc wh wh wh wh wc R wc wc bg bg bg bg wv R wv bg bg bg P bg wv R wv bg w bg bg bg wv R wv bg bg w bg bg wv R wc wc bg bg bg wc wc R w wc wh wh wh wc w #2", 
+15:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg w w P bg wv R wv bg bg bg bg bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #2", 
 
-16:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg w bg P bg wv R wv bg w bg w bg wv R wv bg bg bg bg bg wv R wc wc bg bg wc wh wc R w wc wh wh wc w w", 
-17:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg bg bg bg bg wv R wv bg P bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc", 
-18:"w w wc wh wh wh wc w R wc wh wc bg bg bg wv w R wv bg bg bg w bg wc wc R wv bg w w w bg bg wv R wv bg P bg bg bg bg wv R wv bg w w w bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc", 
-19:"w wc wh wh wh wc wh wc R w wv bg bg bg w bg wv R wc wc bg w bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg w bg bg P bg wv R wv bg bg bg w w bg wv R wc wh wc bg bg bg bg wv R w w wc wh wh wh wh wc", 
-20:"wc wh wh wh wh wh wh wc R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg w P bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc", 
+16:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg w bg P bg wv R wv bg w bg w bg wv R wv bg bg bg bg bg wv R wc wc bg bg wc wh wc R w wc wh wh wc w w #3", 
+17:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg bg bg bg bg wv R wv bg P bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #3", 
+18:"w w wc wh wh wh wc w R wc wh wc bg bg bg wv w R wv bg bg bg w bg wc wc R wv bg w w w bg bg wv R wv bg P bg bg bg bg wv R wv bg w w w bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #3", 
+19:"w wc wh wh wh wc wh wc R w wv bg bg bg w bg wv R wc wc bg w bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg w bg bg P bg wv R wv bg bg bg w w bg wv R wc wh wc bg bg bg bg wv R w w wc wh wh wh wh wc #3", 
+20:"wc wh wh wh wh wh wh wc R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg w P bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #3", 
 
 
 21:"", 
@@ -139,7 +139,7 @@ bot.on("message", msg =>{
             .setTitle("LongBot - Longcat for Discord")
             .setColor(0xF5BA00)
             .addField("Commands", "-c!help - Posts this help board.\n-c!play (level) - Start a game at level 1 or specified level.\n-c!reset - Resets current level.\n-c!next - Continue to next level.")
-            .addField("Notes", "Version 1.1\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please post them in\nthe LongBot Discord server.")
+            .addField("Notes", "Version 1.0\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please post them in\nthe LongBot Discord server.")
             msg.channel.send(helpembed)
             break;
         case "play":
@@ -283,6 +283,45 @@ read = (code, mesg, lvl) =>{
     let x
     let plr = mesg.author.username
 
+    // theme picker
+    switch(bode[bode.length - 1]){
+        case "#0":
+            wallH = "<:wallH:739022697228402699>"
+            wallV = "<:wallV:739022724113891409>"
+            wallC = "<:wallC:739022656837517324>"
+            BG = "<:BG:739022772457570355>"
+            wall = "<:wall:739023283353288716>"
+            break;
+        case "#1":
+            wallH = "<:wall1H:739851273666560041>"
+            wallV = "<:wall1V:739851301847957545>"
+            wallC = "<:wall1C:739851195778203728>"
+            BG = "<:BG:739022772457570355>"
+            wall = "<:wall1:739851336283062353>"
+            break;
+        case "#2":
+            wallH = "<:wall2H:739851495368949770>"
+            wallV = "<:wall2V:739851516151595140>"
+            wallC = "<:wall2C:739851468055511120>"
+            BG = "<:wall1:739851336283062353>"
+            wall = "<:wall2:739851544551489576>"
+            break;
+        case "#3":
+            wallH = "<:wall3H:739851645755588621>"
+            wallV = "<:wall3V:739851686058786977>"
+            wallC = "<:wall3C:739851617142308904>"
+            BG = "<:BG:739022772457570355>"
+            wall = "<:wall3:739851709232185425>"
+            break;
+        case "#3":
+            wallH = "<:wall4H:739851909850071100>"
+            wallV = "<:wall4V:739852050900320298>"
+            wallC = "<:wall4C:739851832343396492>"
+            BG = "<:BG2:739852087034118234>"
+            wall = "<:wall4:739852068596088942>"
+            break;
+    }
+
     // levelcode reading
     for(x = 0; x < bode.length; x += 1){
         if(bode[x] == "wv") level.push(wallV)
@@ -295,6 +334,7 @@ read = (code, mesg, lvl) =>{
         if(bode[x] == "wc") level.push(wallC)
         if(bode[x] == "R") level.push("\n")
     }
+
     level = level.toString().replace(/,/g, "")
 
     // embed compiling
