@@ -180,7 +180,7 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
-                this.msg.channel.bulkDelete(3)
+                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             a(){
@@ -192,6 +192,7 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
+                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             w(){
@@ -204,6 +205,7 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
+                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             s(){
@@ -216,6 +218,7 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
+                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
 
@@ -234,6 +237,7 @@ class game{
                 if(!this.playing || this.msg.author.id != this.plrID) return;
                 this.lvlcode = ""
                 this.lvlcode = levels[this.lvl]
+                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             next(){
@@ -268,19 +272,19 @@ bot.on("messageReactionAdd", (react, user) =>{
             games[user.id].next()
             break;
     }
-    react.message.delete()
 })
 
 // level generation
 
 read = (code, mesg, lvl) =>{
     let spaces = 0
-    let bode
+    let bode = code.split(" ")
     let level = []
     let x
     let plr = mesg.author.username
+
     // levelcode reading
-    for(x = 0, bode = code.split(" "); x < bode.length; x += 1){
+    for(x = 0; x < bode.length; x += 1){
         if(bode[x] == "wv") level.push(wallV)
         if(bode[x] == "wh") level.push(wallH)
         if(bode[x] == "bg"){level.push(BG); spaces += 1}
@@ -292,6 +296,7 @@ read = (code, mesg, lvl) =>{
         if(bode[x] == "R") level.push("\n")
     }
     level = level.toString().replace(/,/g, "")
+
     // embed compiling
     const lvlembed = new Discord.MessageEmbed()
     .setColor(0xF5BA00)
@@ -299,8 +304,8 @@ read = (code, mesg, lvl) =>{
     .setDescription(level + "\n\nWASD/up down left right to move")
     .setFooter("Created by Afely\nThanks to Martin Magni & Fancade")
     // win detection
-    if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**\nc!next to continue")
-    if(code.length = 0){mesg.channel.send("This level does not exist."); return;}
+    if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**\nc!next or ⏭️ to continue")
+    if(bode.length = 0){mesg.channel.send("This level does not exist."); return;}
     mesg.channel.send(lvlembed)
 }
 
