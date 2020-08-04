@@ -28,7 +28,7 @@ var levels = {
 7:"wc wh wh wh wc w w R wv bg bg bg wc wc w R wv bg w bg bg wc wc R wv bg P bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
 8:"w wc wh wh wh wc w R wc wc bg bg bg wv w R wv bg bg w bg wc wc R wv bg bg bg bg bg wv R wv bg bg bg P bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
 9:"wc wh wh wh wh wc w R wv bg bg bg P wc wc R wv bg w bg bg bg wv R wv bg bg bg w bg wv R wc wc bg bg bg bg wv R wv bg bg bg wc wh wc R w wc wh wh wc w w #1", 
-10:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wh wc #1", 
+10:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wc bg bg bg bg wv R wc wc wh wh wh wh wc #1", 
 
 
 11:"w w w wc wh wh wc R w w wc wc bg bg wv R wc wh wc bg bg bg wv R wv bg bg bg P bg wv R wc wc bg bg bg bg wv R w wv bg bg bg bg wv R w wc wh wh wh wh wc #2", 
@@ -44,17 +44,17 @@ var levels = {
 20:"wc wh wh wh wh wh wh wc R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg w P bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #3", 
 
 
-21:"", 
-22:"", 
-23:"", 
-24:"", 
-25:"", 
+21:"w wc wh wh wh wh wh wc R wc wc bg bg bg bg bg wv R wv bg bg w w w bg wv R wv bg bg bg bg w bg wv R wv bg w w bg w bg wv R wv bg bg bg bg bg bg wv R wc wh wh wc P bg wc wc R w w w wc wh wh wc w #4", 
+22:"w wc wh wh wh wc w w R w wv bg bg bg wc wh wc R w wv bg P bg bg bg wv R w wv bg bg bg w bg wv R wc wc bg w bg bg bg wv R wv bg bg w bg bg w wc R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #4", 
+23:"wc wh wh wh wh wh wh wc R wv bg bg bg bg bg bg wv R wv bg w w bg bg bg wv R wv bg w bg bg w bg wv R wv bg bg bg w w bg wv R wv bg bg bg P bg bg wv R wv bg bg bg bg bg wc wc R wc wh wh wh wh wh wc w #4", 
+24:"w wc wh wh wh wc w w R w wv bg bg bg wc wc w R wc wc bg w bg bg wc wc R wv bg bg bg w bg bg wv R wv bg P bg w w bg wv R wv bg bg bg bg bg bg wv R wc wh wc bg bg wc wh wc R w w wc wh wh wc w w #4", 
+25:"wc wh wh wh wc wh wh wc R wv bg bg bg w bg bg wv R wv bg w bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg w bg bg wv R wv bg P bg bg bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #4", 
 
-26:"", 
-27:"", 
-28:"", 
-29:"", 
-30:"", 
+26:"wc wh wh wh wc wh wh wc R wv bg bg w wv bg bg wv R wv bg bg bg wc bg bg wv R wv bg w bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg P bg bg bg bg wv R wv bg bg bg w bg bg wv R wc wh wh wh wc wh wh wc #0", 
+27:"w wc wh wh wh wh wh wc R wc wc bg bg bg bg bg wv R wv bg bg bg bg w bg wv R wv bg w bg bg bg w wc R wv bg bg bg w bg bg wv R wv bg P w w w bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #0", 
+28:"wc wh wh wc wh wh wh wc R wv bg bg w bg bg bg wv R wv bg bg bg bg P bg wv R wv bg bg bg bg bg bg wv R wv bg bg w bg w bg wv R wv bg bg bg bg w bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #0", 
+29:"wc wh wh wc wc wh wh wc R wv bg bg w w bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg P bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #0", 
+30:"wc wh wh wh wh wh wh wc R wv bg bg bg bg bg bg wv R wv bg bg bg w w bg wv R wc w bg bg w P bg wv R wc w bg bg bg bg bg wv R wv bg bg w bg bg bg wv R wv bg bg bg bg bg bg wv R wc wh wh wh wh wh wh wc #0", 
 
 
 31:"", 
@@ -82,11 +82,16 @@ var levels = {
 50:"", 
 }
 
+var reacted
+
 bot.on("ready", () =>{console.log("LongBot is online."); bot.user.setActivity("c!help", {type: "WATCHING"})});
 
+var timer
 bot.on("message", msg =>{
     if(msg.author.id == bot.user.id && msg.embeds[0].title.includes("•")){
-        msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️")
+        reacted = false
+        timer = setTimeout(bebe = () =>{reacted = true}, 6000)
+        msg.react("🔼"); msg.react("🔽"); msg.react("◀️"); msg.react("▶️"); msg.react("🔄"); msg.react("⏭️");
     }
     if(msg.author.bot) return;
     mbsg = msg
@@ -96,35 +101,43 @@ bot.on("message", msg =>{
 
     switch(msg.content.toLowerCase()){
         case "w":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].w()
             break;
         case "up":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].w()
             break;
         case "a":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].a()
             break;
         case "left":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].a()
             break;
         case "s":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].s()
             break;
         case "down":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].s()
             break;
         case "d":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].d()
             break;
         case "right":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
+            msg.channel.bulkDelete(2)
             games[msg.author.id].d()
             break;
     }
@@ -139,7 +152,7 @@ bot.on("message", msg =>{
             .setTitle("LongBot - Longcat for Discord")
             .setColor(0xF5BA00)
             .addField("Commands", "-c!help - Posts this help board.\n-c!play (level) - Start a game at level 1 or specified level.\n-c!reset - Resets current level.\n-c!next - Continue to next level.")
-            .addField("Notes", "Version 1.0\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please post them in\nthe LongBot Discord server.")
+            .addField("Notes", "Version 1.1\nBot created by Afely\nFancade & Longcat created by Martin Magni\nAfely's depression created by Javascript\nCheck out PolyMars' video where he created Sokobot, which\nwas my inspiration for this project!\nyoutu.be/0fWdU8JCT6Y\n\nIf you find any bugs, please post them in\nthe LongBot Discord server.")
             msg.channel.send(helpembed)
             break;
         case "play":
@@ -149,11 +162,11 @@ bot.on("message", msg =>{
             games[msg.author.id].play()
             break;
         case "reset":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
             games[msg.author.id].reset()
             break;
         case "next":
-            if(!games[msg.author.id]) return;
+            if(!games[msg.author.id] || !reacted) return;
             games[msg.author.id].next()
     }
 })
@@ -180,7 +193,6 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
-                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             a(){
@@ -192,7 +204,6 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
-                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             w(){
@@ -205,7 +216,6 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
-                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             s(){
@@ -218,7 +228,6 @@ class game{
                 }
                 this.lvlcode = this.lvlview.toString()
                 this.lvlcode = this.lvlcode.replace(/,/g, " ")
-                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
 
@@ -237,7 +246,6 @@ class game{
                 if(!this.playing || this.msg.author.id != this.plrID) return;
                 this.lvlcode = ""
                 this.lvlcode = levels[this.lvl]
-                this.msg.channel.bulkDelete(2)
                 read(this.lvlcode, this.msg, this.lvl)
             }
             next(){
@@ -250,7 +258,7 @@ class game{
         }
 
 bot.on("messageReactionAdd", (react, user) =>{
-    if(!games[user.id] || !react.message.embeds[0].title.startsWith(user.username) || react.message.author.id != bot.user.id) return;
+    if(!games[user.id] || !react.message.embeds[0].title.startsWith(user.username) || react.message.author.id != bot.user.id || !reacted) return;
 
     switch(react.emoji.name){
         case "🔼":
@@ -272,16 +280,38 @@ bot.on("messageReactionAdd", (react, user) =>{
             games[user.id].next()
             break;
     }
+    react.message.delete()
 })
 
 // level generation
 
 read = (code, mesg, lvl) =>{
     let spaces = 0
-    let bode = code.split(" ")
+    let bode
+    if(code != undefined) bode = code.split(" ")
     let level = []
     let x
     let plr = mesg.author.username
+    let loss
+
+    // error message
+    if(code == undefined){
+        let title = Math.floor(Math.random() * 6)
+        let errorembed = new Discord.MessageEmbed()
+        .setColor(0xF5BA00)
+        if(title < 1) errorembed.setTitle("Uh oh!")
+        else if(title < 2) errorembed.setTitle("Whoops!")
+        else if(title < 3) errorembed.setTitle("Rats!")
+        else if(title < 4) errorembed.setTitle("Oops!")
+        else errorembed.setTitle("Well dang!")
+        errorembed.setDescription("Looks like that isn't a valid level!")
+        mesg.channel.send(errorembed)
+        return;
+    }
+
+    // loss detection
+    let lvlsize = code.substr(0, bode.indexOf("R")).length + 1
+    if(bode[bode.indexOf("P") - 1] != "bg" && bode[bode.indexOf("P") + 1] != "bg" && bode[bode.indexOf("P") + lvlsize] != "bg" && bode[bode.indexOf("P") - lvlsize] != "bg") loss = true
 
     // theme picker
     switch(bode[bode.length - 1]){
@@ -313,7 +343,7 @@ read = (code, mesg, lvl) =>{
             BG = "<:BG:739022772457570355>"
             wall = "<:wall3:739851709232185425>"
             break;
-        case "#3":
+        case "#4":
             wallH = "<:wall4H:739851909850071100>"
             wallV = "<:wall4V:739852050900320298>"
             wallC = "<:wall4C:739851832343396492>"
@@ -341,11 +371,12 @@ read = (code, mesg, lvl) =>{
     const lvlembed = new Discord.MessageEmbed()
     .setColor(0xF5BA00)
     .setTitle(plr + " • LEVEL " + lvl)
-    .setDescription(level + "\n\nWASD/up down left right to move")
+    .setDescription(level + `\n\nWASD/"up", "down", "left", "right"/reactions to move`)
     .setFooter("Created by Afely\nThanks to Martin Magni & Fancade")
-    // win detection
+
+    // win/loss detection
+    if(loss) lvlembed.setDescription(level + "\n\n**YOU LOSE**\nc!reset or 🔄 to reset")
     if(spaces == 0) lvlembed.setDescription(level + "\n\n**YOU WIN!**\nc!next or ⏭️ to continue")
-    if(bode.length = 0){mesg.channel.send("This level does not exist."); return;}
     mesg.channel.send(lvlembed)
 }
 
