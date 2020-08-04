@@ -28,7 +28,7 @@ var levels = {
 7:"wc wh wh wh wc w w R wv bg bg bg wc wc w R wv bg w bg bg wc wc R wv bg P bg bg bg wv R wv bg bg bg w bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
 8:"w wc wh wh wh wc w R wc wc bg bg bg wv w R wv bg bg w bg wc wc R wv bg bg bg bg bg wv R wv bg bg bg P bg wv R wv bg bg bg bg bg wv R wc wh wh wh wh wh wc #1", 
 9:"wc wh wh wh wh wc w R wv bg bg bg P wc wc R wv bg w bg bg bg wv R wv bg bg bg w bg wv R wc wc bg bg bg bg wv R w wv bg bg wc wh wc R w wc wh wh wh wc w #1", 
-10:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wh wc #1", 
+10:"wc wh wh wh wh wh wc R wv bg bg bg bg bg wv R wv bg P bg w bg wv R wv bg w bg bg bg wv R wv bg bg bg bg bg wv R wc wc bg bg bg bg wv R w wc wh wh wh wc #1", 
 
 
 11:"w w w wc wh wh wc R w w wc wc bg bg wv R wc wh wc bg bg bg wv R wv bg bg bg P bg wv R wc wc bg bg bg bg wv R w wv bg bg bg bg wv R w wc wh wh wh wh wc #2", 
