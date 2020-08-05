@@ -156,6 +156,7 @@ bot.on("message", msg =>{
             msg.channel.send(helpembed)
             break;
         case "play":
+            if(msg.guild.id == "739416043637702667" && !msg.channel.name.startsWith("play")) return;
             if(!games[msg.author.id]){
             games[msg.author.id] = new game(msg.author.username, msg.author.id, msg)
             }
